@@ -43,28 +43,17 @@ body {
     margin-bottom: 20px;
 }
 
-.message p {
+.info {
+    margin-top: 30px;
+}
+
+.info p {
     font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 30px;
-}
-
-.features ul {
-    list-style: none;
-}
-
-.features li {
-    font-size: 1.1rem;
     margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
 }
 
-.features li::before {
-    content: '✔';
+.info strong {
     color: #4a90e2;
-    position: absolute;
-    left: 0;
 }
 
 .footer {
