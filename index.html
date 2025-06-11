@@ -160,19 +160,25 @@
             if (analyser) {
                 analyser.getByteFrequencyData(dataArray);
                 
-                for (let i = 0; i < bars.length; i++) {
-                    const index = Math.floor(i * (dataArray.length / bars.length));
-                    const height = (dataArray[index] / 255) * 100;
-                    bars[i].style.height = `${height}px`;
-                    bars[i].style.opacity = 0.5 + (height / 200);
-                }
-            }
-        }
-        
-        // Сброс кнопки при завершении воспроизведения
-        audio.addEventListener('ended', function() {
-            playButton.innerHTML = '<i class="fas fa-music"></i> Воспроизвести звук';
-        });
-    </script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Голосовая связь</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        #speakBtn { background-color: #4CAF50; color: white; }
+        #listenBtn { background-color: #2196F3; color: white; }
+        #status { margin: 20px 0; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Голосовая связь</h1>
+    <button id="speakBtn">Говорить</button>
+    <button id="listenBtn">Слушать</button>
+    <div id="status">Статус: Не подключено</div>
+    <audio id="audioElement" autoplay></audio>
+
+    <script src="app.js"></script>
 </body>
 </html>
