@@ -115,24 +115,24 @@
     </style>
 </head>
 <body>
-    <h1>Telegram Bot Control Panel</h1>
+    <h1>Telegram Bot</h1>
     
     <div class="warning">
         ⚠️ Не забудь вставить токен бота, получить его можно в @botfather
     </div>
     
     <div class="instruction">
-        <h2>Инструкция по созданию исполняемого файла</h2>
-        <p>1. Установите pyinstaller:</p>
+        <h2>Инструкция по созданию файла</h2>
+        <p>1. Установить pyinstaller:</p>
         <div class="command">pip install pyinstaller</div>
         
-        <p>2. Создайте исполняемый файл без консоли:</p>
+        <p>2. Создать файл</p>
         <div class="command">pyinstaller --noconsole --onefile ваш_файл.py</div>
         
         <p>Готовый файл будет в папке dist</p>
     </div>
     
-    <h2>Код Telegram бота</h2>
+    <h2>Сам код</h2>
     
     <div class="code-container">
         <button class="copy-btn" onclick="copyCode()">Копировать код</button>
@@ -206,19 +206,15 @@ TOKEN = <span class="string">"YOUR_TELEGRAM_BOT_TOKEN"</span>
 <span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
     _15()</code></pre>
     </div>
-    
-    <footer>
-        <p>© 2023 Telegram Bot Control Panel | Для образовательных целей</p>
-    </footer>
 
     <script>
         function copyCode() {
             const code = document.querySelector('.code-container code').innerText;
             navigator.clipboard.writeText(code).then(() => {
                 const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Скопировано!';
+                btn.textContent = 'Скопировано';
                 setTimeout(() => {
-                    btn.textContent = 'Копировать код';
+                    btn.textContent = 'Скопировать';
                 }, 2000);
             });
         }
